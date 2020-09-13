@@ -24,8 +24,8 @@ public class ReportErrorTransaction {
 	}
 
 	private static List<Transaction> prepareErrorList(List<Transaction> transactionList) {
-		List<Transaction> errorList;
-		errorList = transactionList.stream()  											// created stream out of main list
+		
+			return transactionList.stream()  											// created stream out of main list
 		.filter(transList -> Stream.of(transactionList.stream() 						// apply main filter with same list
 				.filter(n -> n.getName().isEmpty() || n.getTransactiondId().isEmpty()) 	// apply sub filter to obtain records without values
 				.map(Transaction::getMerchantId) 										// get common filtered field for future matching 
@@ -37,7 +37,7 @@ public class ReportErrorTransaction {
 				.equals(transList.getMerchantId())))
 				.sorted(Comparator.comparingInt(Transaction::getId))					// ordered the list based on id
 				.collect(Collectors.toList());
-		return errorList;
+		
 	}
 
 	private static List<Transaction> prepareTransactionList() {
